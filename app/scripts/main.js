@@ -97,7 +97,36 @@ function appViewModel() {
   NewsTrail.init = function() {
     NewsTrail.populateTemplates();
     NewsTrail.publish();
+    bingDataPull();
   }
+}
+
+function bingDataPull() {
+  //Key is 11792cf9aef14f2eb0499fbbe06ce6c4
+  var params = {
+    // Request parameters
+    "Category": "World"
+  };
+
+  $.ajax({
+    url: "https://api.cognitive.microsoft.com/bing/v5.0/news/?" + $.param(params),
+    beforeSend: function(xhrObj){
+      // Request headers
+      xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","11792cf9aef14f2eb0499fbbe06ce6c4");
+    },
+    type: "GET",
+    // Request body
+    data: "mkt=en-US&q=Trump&count=50",
+    crossDomain: true,
+    contentType:'application/json; charset=utf-8',
+    dataType: 'json'
+  })
+    .done(function(data) {
+      NewsTrail.bingResponse = data;
+    })
+    .fail(function() {
+      console.log("Bing Response Failure")
+    });
 }
 
 appViewModel();
