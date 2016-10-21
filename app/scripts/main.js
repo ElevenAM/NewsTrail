@@ -6,6 +6,8 @@ function appViewModel() {
 
   NewsTrail.templatePost = "";
 
+  NewsTrail.eventCount = 30;
+
 //Active timeline to be dynamically generated off highest important events between a certain date range
   NewsTrail.activeTimeline = [
     {
@@ -81,13 +83,40 @@ function appViewModel() {
   NewsTrail.populateTemplates = function() {
     for (var i = 0; i < NewsTrail.activeTimeline.length; i++) {
       var currentItem = NewsTrail.activeTimeline[i];
-      var template = "<div id='" + i + "' class='timelinetile'><div class='col-left'><img src="+ currentItem.thumbnail + "></img></div><div class='col-right'><h2>" + currentItem.title + "</h2><p>" + currentItem.description + "</p><a href="+ currentItem.url +">Read more</a></div></div>"
-      currentItem.template = template;
+      currentItem.template = "<div id='" + i + "' class='timelinetile'><div class='col-left'>< src="+ currentItem.thumbnail + "></div><div class='col-right'><h2>" + currentItem.title + "</h2><p>" + currentItem.description + "</p><a href="+ currentItem.url +">Read more</a></div></div>";
     }
   };
 
-  NewsTrail.modifyTimeScope = function() {
+  NewsTrail.lowerTimeBound = 2000;
+  NewsTrail.upperTimeBound = 2016;
+
+  NewsTrail.modifyTimeBounds = function(lower,upper) {
     //Generate new active timeline based on highest relative importance from full timeline within date range
+    NewsTrail.lowerTimeBound = lower;
+    NewsTrail.upperTimeBound = upper;
+    NewsTrail.filterEvents();
+  };
+
+  NewsTrail.filterEvents = function(){
+    //Create temp array of the X most important events. Order array by date
+    var tempArray = [];
+    for (var i=0;i<NewsTrail.fullTimeline;i++){
+      if(NewsTrail.fullTimeline[i]<=NewsTrail.upperTimeBound && NewsTrail.fullTimeline[i] >= NewsTrail.lowerTimeBound){
+        tempArray.push(NewsTrail.fullTimeline[i]);
+      }
+    }
+    tempArray.sort(function(a, b){
+      return b.relativeImportance-a.relativeImportance
+    });
+    //Change active timeline to the new array
+    NewsTrail.activeTimeline = tempArray.slice(0,NewsTrail.eventCount);
+    NewsTrail.clearTimeline();
+    NewsTrail.publish();
+  };
+
+  NewsTrail.clearTimeline = function(){
+    //Clear the html to make space for a new TimeLine
+    $('div').remove('.timelinetile');
   };
 
   NewsTrail.pullNewTimeline = function() {
