@@ -1,0 +1,99 @@
+{
+ "users": [
+    "1": {
+      "id": 1,
+      "name": "Bret",
+      "posts": [
+        {
+          "timestamp": 1,
+          "title": "Post 1",
+          "body": "sunt aut facere repellat provident",
+          "comments": [
+            "hello",
+            "hi",
+            "buenos tardes",
+            "tres bien"
+          ]
+        },
+        {
+          "timestamp": 2,
+          "title": "Post 2",
+          "body": "occaecati excepturi optio reprehenderit",
+          "comments": [
+            "hello",
+            "hi",
+            "buenos tardes",
+            "tres bien"
+          ]
+        },
+        {
+          "timestamp": 3,
+          "title": "Post 3",
+          "body": "qui est esse",
+          "comments": [
+            "hello",
+            "hi",
+            "buenos tardes",
+            "tres bien"
+          ]
+        },
+        {
+          "timestamp": 4,
+          "title": "Post 4",
+          "body": "eum et est occaecati",
+          "comments": [
+            "hello",
+            "hi",
+            "buenos tardes",
+            "tres bien"
+          ]
+        },
+        {
+          "timestamp": 5,
+          "title": "Post 5",
+          "body": "nesciunt quas odio",
+          "comments": [
+            "hello",
+            "hi",
+            "buenos tardes",
+            "tres bien"
+          ]
+        }
+      ],
+      "albums": [
+        {
+          "title": "Chickens",
+          "image": "",
+          "redirect": ""
+        },
+        {
+          "title": "Turtles",
+          "image": "",
+          "redirect": ""
+        },
+        {
+          "title": "Rabbits",
+          "image": "",
+          "redirect": ""
+        }
+      ],
+      "todos": [
+        {
+          "title": "So much work",
+          "description": "afdss",
+          "due": "010101"
+        },
+        {
+          "title": "More work",
+          "description": "dafagasd",
+          "due": "020202"
+        },
+        {
+          "title": "Done with work",
+          "description": "adsdfsadf",
+          "due": "030303"
+        }
+      ]
+    }
+ ]
+}
